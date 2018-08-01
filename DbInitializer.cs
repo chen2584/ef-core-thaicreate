@@ -7,8 +7,12 @@ namespace TestEntityFramework.Data
     {
         public static void Initialize(TestDbContext db)
         {
-            db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
+
+            if(db.Customer.Any())
+            {
+                return;
+            }
 
             var countrys = new Country[]
             {
@@ -43,6 +47,10 @@ namespace TestEntityFramework.Data
                 new Audit() { Audit_Id = 8, Customer_Id = "C003", Log_Date = Convert.ToDateTime("25-Aug-2015"), Used = 200000f  },
                 new Audit() { Audit_Id = 9, Customer_Id = "C004", Log_Date = Convert.ToDateTime("04-Aug-2015"), Used = 100000f  },
             };
+
+            db.Audit.AddRange(audits);
+            db.SaveChanges();
+
         }
     }
 }
