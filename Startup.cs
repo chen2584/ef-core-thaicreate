@@ -27,7 +27,7 @@ namespace TestEntityFramework
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TestDbContext>(options => options.UseNpgsql(Configuration.GetValue("ConnectionString", "")));
+            services.AddDbContext<TestDbContext>(options => options.UseSqlServer(Configuration.GetValue("ConnectionString", "")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

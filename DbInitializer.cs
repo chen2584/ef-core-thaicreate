@@ -7,9 +7,9 @@ namespace TestEntityFramework.Data
     {
         public static void Initialize(TestDbContext db)
         {
-            db.Database.EnsureCreated();
+            var createDb = db.Database.EnsureCreated();
 
-            if(db.Customer.Any())
+            if(!createDb)
             {
                 return;
             }
